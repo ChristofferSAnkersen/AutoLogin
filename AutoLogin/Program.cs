@@ -65,10 +65,10 @@ namespace AutoLogin
 
                 Thread.Sleep(2500);
                 Console.WriteLine("Successfully responded to Work Mood!");
-                Thread.Sleep(2500);
                 chrome.Close();
+                chrome.Dispose();
                 Environment.Exit(0);
-
+                return;
             }
             catch (Exception ex)
             {
