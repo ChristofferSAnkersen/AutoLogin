@@ -12,6 +12,16 @@ namespace AutoLogin
             const string name = "USERNAME";
             const string password = "PASSWORD";
             Uri url = new Uri("https://relesys.relesysapp.net");
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            // Randomize the time to run this
+            Random random = new Random();
+            int minutesToWait = random.Next(0, 60);
+            int millisecondsToWait = (minutesToWait * 60000) + 1000;
+
+            Console.WriteLine("Waiting " + (millisecondsToWait / 60000).ToString() + " minutes before continuing!");
+            Console.WriteLine("Triggered at: " + DateTime.Now.ToString("HH:mm") + " - Executing at: " + DateTime.Now.AddMinutes(minutesToWait).ToString("HH:mm"));
+            Thread.Sleep(millisecondsToWait);
 
             try
             {
@@ -21,6 +31,7 @@ namespace AutoLogin
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Logging In");
+                Console.ForegroundColor = ConsoleColor.Red;
 
                 // Username (if not already filled)
                 IWebElement userField = chrome.FindElementById("Username");
@@ -41,9 +52,11 @@ namespace AutoLogin
                 IWebElement skip = chrome.FindElementByCssSelector("button[ng-click='Continue()']");
                 skip.Click();
 
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Login Successful");
                 Console.WriteLine("-----------------------");
                 Console.WriteLine("Responding to workmood!");
+                Console.ForegroundColor = ConsoleColor.Red;
 
                 Thread.Sleep(3000);
 
@@ -64,6 +77,7 @@ namespace AutoLogin
                 happy.Click();
 
                 Thread.Sleep(2500);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Successfully responded to Work Mood!");
                 chrome.Close();
                 chrome.Dispose();
