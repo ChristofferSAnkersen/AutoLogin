@@ -8,21 +8,24 @@ namespace AutoLogin
 {
     class Program
     {
+        private static int _retries = 0;
+
         static void Main(string[] args)
         {
-            const string name = "";
-            const string password = "";
+            const string name = "60857799";
+            const string password = "Gizmo999";
             Uri url = new Uri("https://relesys.relesysapp.net");
             Console.ForegroundColor = ConsoleColor.Green;
 
             // Randomize the time to run this
             Random random = new Random();
             int minutesToWait = random.Next(0, 60);
-#if DEBUG
-            minutesToWait = 0;
-#endif
             int millisecondsToWait = (minutesToWait * 1000) + 1000;
             TimeSpan timeout = new TimeSpan(0, 0, 30);
+
+#if DEBUG
+            millisecondsToWait = 0;
+#endif
 
             Console.WriteLine("Waiting " + (millisecondsToWait / 1000).ToString() + " minutes before continuing!");
             Console.WriteLine("Triggered at: " + DateTime.Now.ToString("HH:mm") + " - Executing at: " + DateTime.Now.AddMinutes(minutesToWait).ToString("HH:mm"));
@@ -90,6 +93,10 @@ namespace AutoLogin
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ReadLine();
+                if (_retries < 3)
+                {
+                    Main(new string[0]);
+                }
             }
         }
     }
