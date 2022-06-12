@@ -1,7 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Reflection;
 using System.Threading;
 
 namespace AutoLogin
@@ -12,8 +14,12 @@ namespace AutoLogin
 
         static void Main(string[] args)
         {
-            const string name = "60857799";
-            const string password = "Gizmo999";
+            IConfiguration config = new ConfigurationBuilder()
+                .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
+                .Build();
+
+            string name = config["Username"];
+            string password = config["Password"];
             Uri url = new Uri("https://relesys.relesysapp.net");
             Console.ForegroundColor = ConsoleColor.Green;
 
