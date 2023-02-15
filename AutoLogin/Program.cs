@@ -25,7 +25,7 @@ namespace AutoLogin
 
             // Randomize the time to run this
             Random random = new Random();
-            int minutesToWait = random.Next(0, 20);
+            int minutesToWait = random.Next(0, 5);
             int millisecondsToWait = (minutesToWait * 1000) + 1000;
             TimeSpan timeout = new TimeSpan(0, 0, 30);
 
