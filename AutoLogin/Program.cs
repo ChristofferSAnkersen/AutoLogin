@@ -83,7 +83,8 @@ namespace AutoLogin
                 workMood.Click();
 
                 // Press nr. 5
-                IWebElement happy = awaiter.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//img[@src='/Content/Graphics/WorkMood/5.png']")));
+                IWebElement happy = awaiter.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//img[@src='/Content/Graphics/WorkMood/5.png']")));
+                //IWebElement happy = awaiter.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//img[@src='/Content/Graphics/WorkMood/5.png']")));
                 happy.Click();
 
                 Thread.Sleep(2500);
